@@ -137,7 +137,7 @@ public class User {
 	}
 	
 	// returns the photos image path for this user
-	@Transient // to indicate that this method is not mapped to any field in the db
+	@Transient // to indicate that this method is not mapped to any column in the db
 	public String getPhotosImagePath() {
 		
 		if (id == null || photos == null) return "/images/default-user.png";
@@ -145,6 +145,10 @@ public class User {
 		return "/user-photos/" + this.id + "/" + this.photos;
 	}
 	
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 
 	
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //this is Spring RESTful web-service controller, so we need to use this annotation.
 @RestController 
-public class UserRestConrtoller {
+public class UserRestController {
 	
 	@Autowired
 	private UserService service;

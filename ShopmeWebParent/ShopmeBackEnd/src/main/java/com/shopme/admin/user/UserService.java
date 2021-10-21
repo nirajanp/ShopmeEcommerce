@@ -33,10 +33,12 @@ public class UserService {
 	
 	// this methods returns list of users
 	public List<User> listAll(){
-		return (List<User>) userRepo.findAll();
+		// passed Sort object to sort by name in ascending order
+		return (List<User>) userRepo.findAll(Sort.by("firstName").ascending());
 	}
 	
 	// returns small set of user objects for specific page numbers
+	// it is mainly used for Pagination, and Sort
 	public Page<User> listByPage(int pageNum, String sortField, String sortDir, String keyword) {
 		Sort sort = Sort.by(sortField);
 		sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();

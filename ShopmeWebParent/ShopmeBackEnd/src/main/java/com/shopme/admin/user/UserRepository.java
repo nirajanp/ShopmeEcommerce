@@ -14,7 +14,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
 	
 	// We use @Query annotation here to specify custom JPA query
 	@Query("SELECT u FROM User u WHERE u.email = :email")
-	public User getUserByEmail(@Param("email") String emaill) ;
+	public User getUserByEmail(@Param("email") String email) ;
 	
 	// this method follows the convention specified by Spring Data JPA,
 	// so we don't have to specify any SQL statement.
