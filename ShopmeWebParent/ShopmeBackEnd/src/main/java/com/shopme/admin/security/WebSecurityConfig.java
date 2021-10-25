@@ -50,7 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.loginPage("/login")
 					.usernameParameter("email") // we used username parameter as email that's why - by default username param is username.
 					.permitAll()
-					.and().logout().permitAll();
+					.and().logout().permitAll() // after permitAll() it is for remember me func.
+					// just rememberMe() it self will remember password as long as application in not restarted
+					// when application is restarted randomly generated key will be lost and remember-me cookie's 
+					// information will be lost. If we add some default key then remember me functionality can be used
+					// even when application is restarted.
+					.and().rememberMe().key("AbcDefgHijklmnOpqrs_1234567890")
+					// set token validity time
+					.tokenValiditySeconds(7 * 24 * 60 * 60);  
 	}
 	
 	// authenticated() will authenticate everything that comes to login page.
