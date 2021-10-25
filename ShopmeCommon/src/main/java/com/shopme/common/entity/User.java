@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class User {
 
 	// to implement many to many entity relationship between user and role,
 	// we need to have a collection
-	@ManyToMany // To map this set collection to many-to-many entity relationship we need this
+	@ManyToMany(fetch = FetchType.EAGER) // To map this set collection to many-to-many entity relationship we need this
 				// annotation
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();

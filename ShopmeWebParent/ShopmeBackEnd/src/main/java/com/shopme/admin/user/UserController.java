@@ -43,6 +43,7 @@ public class UserController {
 		System.out.println("Sort Field: " + sortField);
 		System.out.println("Sort Order: " + sortDir);
 		System.out.println("Keyword: " + keyword);
+		
 		Page<User> page = service.listByPage(pageNum, sortField, sortDir, keyword);
 		List<User> listUsers = page.getContent();
 		

@@ -73,7 +73,7 @@ public class UserRepositoryTest {
 	
 	// retrieve all users from the database
 	@Test
-	public void testListAllUsers() {
+	public void testListAllUssers() {
 		Iterable<User> listUsers = repo.findAll();
 		// forEach user of listUsers it will perform print operation
 		listUsers.forEach(user -> System.out.println(user));
