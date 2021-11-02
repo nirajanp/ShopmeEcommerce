@@ -31,6 +31,10 @@ public class UserService {
 	
 	public static final int USERS_PER_PAGE = 4;
 	
+	public User getByEmail(String email) {
+		return userRepo.getUserByEmail(email);
+	}
+	
 	// this methods returns list of users
 	public List<User> listAll(){
 		// passed Sort object to sort by name in ascending order
@@ -57,6 +61,7 @@ public class UserService {
 		return (List<Role>) roleRepo.findAll();	
 	}
 
+	// save method presists the detail of a user for creating new user, updating a new user
 	public User save(User user) {
 		boolean isUpdatingUser = (user.getId() !=null);
 		
@@ -75,6 +80,25 @@ public class UserService {
 
 		// saves user to the database
 		return userRepo.save(user);
+	}
+	
+	// updating the details of currently logged in user
+	public User updateAccount(User userInForm) {
+		User userInDB = userRepo.findById(userInForm.getId()).get();
+		if (!userInForm.getPassword().isEmpty()) {
+			userInDB.setPassword(userInForm.getPassword());
+			encodePassword(userInDB);	
+		}
+		
+		if (userInForm.getPhotos() != null) {
+			userInDB.setPhotos(userInForm.getPhotos());
+		}
+		
+		userInDB.setFirstName(userInForm.getFirstName());
+		userInDB.setLastName(userInForm.getLastName());
+		
+		return userRepo.save(userInDB);
+		
 	}
 	
 	// this method will get user's password and encode it.

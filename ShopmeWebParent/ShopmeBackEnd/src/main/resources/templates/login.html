@@ -18,6 +18,7 @@
 		
 		<form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 		
+		<!-- if parameter is error in URL link then display Spring Security's error message -->
 			<div th:if="${param.error}">
 				<p class="text-danger"> [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]] </p>
 			</div>
@@ -46,9 +47,7 @@
 			</div>
 		</form>
 		
-		<div>
-			<p>Shopme Control Panel - Copyright &copy; Shopme</p>
-		</div>
+		<div th:replace="fragments :: footer"></div>
 	</div>
 	
 </body>
