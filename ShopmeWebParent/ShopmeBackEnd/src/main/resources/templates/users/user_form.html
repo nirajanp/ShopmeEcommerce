@@ -113,37 +113,7 @@
 	</div>
 
 <script type="text/javascript">
-	// when cancel button is pressed it will redirect to users page
-	$(document).ready(function() {
-		$("#buttonCancel").on("click", function() {
-			window.location = "[[@{/users}]]"
-		});
-		
-		// this is the handeler method for change event of file input
-		$("#fileImage").change(function() {
-		// to check the image size
-		fileSize = this.files[0].size;
-		if(fileSize > 1048576) {
-			this.setCustomValidity("You must choose an image less than 1MB!");
-			this.reportValidity();
-		} else {
-			this.setCustomValidity("");
-			showImageThumbnail(this);
-		}
-		});
-	});
-	
-	// JS code to display image thumbnail
-	function showImageThumbnail(fileInput) {
-		// first file object
-		var file = fileInput.files[0];
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$("#thumbnail").attr("src", e.target.result);
-		};
-		
-		reader.readAsDataURL(file);
-	}
+	moduleURL = "[[@{/}]]";
 	
 	// making AJAX call to the server
 	function checkEmailUnique(form) {
@@ -177,6 +147,7 @@
 		$("#modalDialog").modal();
 	}
 </script>
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 
 </html>

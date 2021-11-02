@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.admin.user.controller;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.security.ShopmeUserDetails;
+import com.shopme.admin.user.UserService;
 import com.shopme.common.entity.User;
 
 @Controller
@@ -25,7 +26,7 @@ public class AccountController {
 	
 	// In this handler method we need the user object that is currently logged in user.
 	// We can use @AuthenticationPrincipal followed by type of the class that implements
-	// user details. ShopmeUserDetails 
+	// UserDetails interface i.e ShopmeUserDetails.
 	// In authentication process spring security will return new instance of ShopmeUserDetails
 	@GetMapping("/account")
 	public String viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser, Model model) {
@@ -33,7 +34,7 @@ public class AccountController {
 		User user = userService.getByEmail(email);
 		model.addAttribute("user", user);
 		// and return logic of view name
-		return "account_form";
+		return "users/account_form";
 	}
 	
 	@PostMapping("/account/update")
