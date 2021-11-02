@@ -44,13 +44,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// this will override display of login page and will display custom defined login page named "/login"
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated()
-				.and()
-				.formLogin()
-					.loginPage("/login")
-					.usernameParameter("email") // we used username parameter as email that's why - by default username param is username.
-					.permitAll()
-					.and().logout().permitAll() // after permitAll() it is for remember me func.
+		http.authorizeRequests()
+			.antMatchers("/users/**").hasAuthority("Admin") // only the users with role "Admin" can access URL followed by "/users/**"
+			.anyRequest().authenticated()
+			.and()
+			.formLogin()
+				.loginPage("/login")
+				.usernameParameter("email") // we used user-name parameter as email that's why - by default user-name param is user-name.
+				.permitAll()
+				.and().logout().permitAll() // after permitAll() it is for remember me func.
 					// just rememberMe() it self will remember password as long as application in not restarted
 					// when application is restarted randomly generated key will be lost and remember-me cookie's 
 					// information will be lost. If we add some default key then remember me functionality can be used

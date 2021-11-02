@@ -16,37 +16,72 @@
 				</button>
 				<div class="collapse navbar-collapse" id="topNavbar">
 					<ul class="navbar-nav">
-						<li class="nav-item">
+						<!-- sec:authorize=... will check if current user has role 'Admin'.
+							If current user's role is 'Admin' then User will be displayed in
+							nav-bar else no. -->
+						<li class="nav-item" sec:authorize="hasAuthority('Admin')">
 							<a class="nav-link" th:href="@{/users}">Users</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/categories}">Categories</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/brands}">Brands</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/products}">Products</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/customers}">Customers</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/shipping}">Shipping</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/orders}">Orders</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" th:href="@{/report}">Sales Report</a>
-						</li>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/categories}">Categories</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/brands}">Brands</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/products}">Products</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/customers}">Customers</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/shipping}">Shipping</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/orders}">Orders</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+							<li class="nav-item">
+								<a class="nav-link" th:href="@{/report}">Sales Report</a>
+							</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/articles}">Articles</a>
 						</li>
+						</th:block>
+						
+						<th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
 						<li class="nav-item">
 							<a class="nav-link" th:href="@{/menus}">Menus</a>
 						</li>
-						<li class="nav-item">
+						</th:block>
+						<!-- With thymeleaf security attributes user won't see Settings
+							after hasAuthority('Admin') applied in view layer. However, if a 
+							user types URL manually settings or any other tab used does not have
+							permission will be accessible. So WebSecurityConfig also needs to be 
+							updated to make URL's unaccessible -->
+						<li class="nav-item" sec:authorize="hasAuthority('Admin')">
 							<a class="nav-link" th:href="@{/settings}">Settings</a>
 						</li>
 						<li>
