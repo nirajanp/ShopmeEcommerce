@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- here we are declaring xml namespace, th is prefix for thymeleaf tag -->
+<!-- second xml namespace with xmlns:sec is from thymeleaf-extras dependency -->
+<!-- The name of this page must be error. -->
+<!-- these error html pages must be inside error folder and must have same HTTP error codes. -->
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Error - Shopme Admin')"></head>
+
+<body>
+
+	<div class="container-fluid">
+		<div th:replace="nav_fragment :: menu"></div>
+		
+		<div class="m-3">
+			<h2>Sorry, you don't have permission to access this page. </h2>
+		</div>
+		
+		<div th:replace="fragments :: footer"></div>
+
+	</div>
+	
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

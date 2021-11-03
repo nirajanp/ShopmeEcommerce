@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- here we are declaring xml namespace, th is prefix for thymeleaf tag -->
+<!-- second xml namespace with xmlns:sec is from thymeleaf-extras dependency -->
+<!-- The name of this page must be error.html. If we save this under 
+	resources/tempelates folder than it will be automatically be picked by
+	default Spring Boot's BasicErrorController-->
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Error - Shopme Admin')"></head>
+
+<body>
+
+	<div class="container-fluid">
+		<div th:replace="nav_fragment :: menu"></div>
+		
+		<div class="m-3">
+			<h2>Sorry, an unexpected error has occurred.</h2>
+		</div>
+		
+		<div th:replace="fragments :: footer"></div>
+
+	</div>
+	
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>
