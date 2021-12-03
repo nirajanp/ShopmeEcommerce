@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
 
 	// to make photo directory in the file system to be accessible to the
-	// client
+	// web client
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		String dirName = "user-photos";
@@ -25,6 +25,19 @@ public class MvcConfig implements WebMvcConfigurer {
 		// to file path
 		registry.addResourceHandler("/" + dirName + "/**")
 			.addResourceLocations("file://" + userPhotosPath + "/");
+		
+		String categoryImgDirName = "../category-images";
+		Path categoryPhotosDir = Paths.get(categoryImgDirName);
+
+		String categoryPhotosPath = categoryPhotosDir.toFile().getAbsolutePath();
+		// double aestrisk to allow all the files under this directory to be available
+		// to the web clients
+		// after that calling addResourceLocations to map addResourceHandler's parameter
+		// to file path
+		registry.addResourceHandler("/category-images/**")
+			.addResourceLocations("file://" + categoryPhotosPath + "/");
 	}
+	
+	
 
 }
