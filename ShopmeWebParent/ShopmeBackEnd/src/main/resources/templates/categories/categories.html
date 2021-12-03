@@ -38,7 +38,7 @@
 		</div>
 		
 		<div>
-			<form th:action="@{/category}" class="form-inline m-3">
+			<form th:action="@{/categories}" class="form-inline m-3">
 				<input type="hidden" name="sortField" th:value="${sortField}">
 				<input type="hidden" name="sortDir" th:value="${sortDir}">
 				Filter: &nbsp;
@@ -65,14 +65,14 @@
 						<th>Photos</th>
 						
 						<th class="hideable-column">
-							<th th:replace="fragments :: column_link('image', 'Category Image', 'tag')"/>
+							<th th:replace="fragments :: column_link('name', 'Category Name', 'tag')"/>
 						</th>
 						
-						<th th:replace="fragments :: column_link('name', 'Category Name', 'none')"/>
-
 						<th th:replace="fragments :: column_link('alias', 'Alias', 'none')"/>
-						
+
 						<th th:replace="fragments :: column_link('enabled', 'Enabled', 'none')"/>
+						
+						
 						<th></th>
 
 					</tr>
@@ -82,9 +82,9 @@
 						<td class="hideable-column">
 							[[${category.id}]]
 						</td>
-						<td><span th:if="${category.image == null}"
-							class="fas fa-portrait fa-3x icon-silver"></span> 
-							
+						<td>
+							<img th:src="@{${category.imagePath}}"
+							style="width: 100px" class="img-fluid"/>							
 						</td>
 						<td class="hideable-column">
 							[[${category.name}]]
